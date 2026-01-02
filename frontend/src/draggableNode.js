@@ -4,7 +4,13 @@ import Styles from "./draggableNode.module.scss"
 
 export const DraggableNode = ({ type, label }) => {
     const onDragStart = (event, nodeType) => {
-      const appData = { nodeType }
+      // If the drag started from a child element (e.g. input/select/button),
+      // cancel the drag so the user can interact with that control.
+      if (event.target !== event.currentTarget) {
+        return;
+      }
+
+      const appData = { nodeType };
       event.target.style.cursor = 'grabbing';
       event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
       event.dataTransfer.effectAllowed = 'move';

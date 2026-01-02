@@ -4,12 +4,11 @@
     height: 60px;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
-
     border-radius: 8px;
     background-color: #fff;
     border: 1px solid #adacac;
-    flex-direction: column;
 
     .nodelabel {
         color: #333;

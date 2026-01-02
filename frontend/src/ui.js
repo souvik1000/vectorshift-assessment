@@ -11,10 +11,11 @@ import { CacheNode } from './nodes/cacheNode';
 import { DelayNode } from './nodes/delayNode';
 import { InputNode } from './nodes/inputNode';
 import { OutputNode } from './nodes/outputNode';
+import { OutputNodeCopy } from './nodes/outputNodeCopy';
 import { FilterNode } from './nodes/filterNode';
 
 import 'reactflow/dist/style.css';
-import Styles from "./ui.module.scss";
+import Styles from "./app.module.scss";
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
@@ -23,6 +24,7 @@ const nodeTypes = {
   text: TextNode,
   customInput: InputNode,
   customOutput: OutputNode,
+  myOutput: OutputNodeCopy,
   math: MathNode,
   json: JSONNode,
   delay: DelayNode,

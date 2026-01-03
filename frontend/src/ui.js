@@ -5,6 +5,7 @@ import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import { LLMNode } from './nodes/llmNode';
 import { TextNode } from './nodes/textNode';
+import { TextNodeCopy } from './nodes/textNodeCopy';
 import { MathNode } from './nodes/mathNode';
 import { JSONNode } from './nodes/jsonNode';
 import { CacheNode } from './nodes/cacheNode';
@@ -21,7 +22,7 @@ const gridSize = 20;
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
   llm: LLMNode,
-  text: TextNode,
+  text: TextNodeCopy,
   customInput: InputNode,
   customOutput: OutputNode,
   myOutput: OutputNodeCopy,

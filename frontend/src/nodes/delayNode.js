@@ -20,6 +20,5 @@ export const DelayNode = createNode({
     { id: 'output', type: 'source', position: Position.Right },
   ],
   width: 180,
-  height: 110,
   bgColor: '#e0f2f1',
 });

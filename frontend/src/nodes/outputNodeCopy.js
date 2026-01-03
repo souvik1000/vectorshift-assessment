@@ -11,14 +11,14 @@ export const OutputNodeCopy = createNode({
       name: 'outputName',
       label: 'Name',
       type: 'text',
-      default: 'output_'
+      default: ''
     },
     {
       name: 'outputType',
       label: 'Type',
       type: 'select',
       options: ['Text', 'Image'],
-      default: 'Text',
+      default: 'text',
     }
   ],
   handles: [

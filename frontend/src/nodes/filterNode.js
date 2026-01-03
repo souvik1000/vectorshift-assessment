@@ -13,7 +13,7 @@ export const FilterNode = createNode({
       label: 'Condition',
       type: 'select',
       options: ['Contains', 'StartsWith', 'EndsWith', 'Equals'],
-      default: 'Contains',
+      default: 'contains',
     },
     {
       name: 'value',
@@ -28,6 +28,5 @@ export const FilterNode = createNode({
     { id: 'nomatch', type: 'source', position: Position.Right },
   ],
   width: 180,
-  height: 140,
   bgColor: '#fff3e0',
 });

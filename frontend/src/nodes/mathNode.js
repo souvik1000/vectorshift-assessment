@@ -14,7 +14,7 @@ export const MathNode = createNode({
       label: 'Operation',
       type: 'select',
       options: ['Add', 'Subtract', 'Multiply', 'Divide'],
-      default: 'Add',
+      default: 'add',
     },
   ],
   handles: [

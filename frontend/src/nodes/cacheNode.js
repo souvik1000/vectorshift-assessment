@@ -1,9 +1,7 @@
-import { createNode } from '../shared/components/nodeFactory';
 import { Position } from 'reactflow';
 
-/**
- * Cache Node - Caches/stores data for reuse
- */
+import { createNode } from '../shared/components/nodeFactory';
+
 export const CacheNode = createNode({
   title: 'Cache',
   description: 'Cache data',
@@ -27,6 +25,5 @@ export const CacheNode = createNode({
     { id: 'cached', type: 'source', position: Position.Right },
   ],
   width: 180,
-  height: 140,
   bgColor: '#ede7f6',
 });

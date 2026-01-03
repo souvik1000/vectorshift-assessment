@@ -8,7 +8,7 @@ export const PipelineToolbar = () => {
         <div className={Styles.toolbarContainer}>
             <div>
                 <h3>Core Nodes</h3>
-                <div style={{ marginTop: '10px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                <div className={Styles.toolbarItems}>
                     <DraggableNode type='customInput' label='Input' />
                     <DraggableNode type='llm' label='LLM' />
                     <DraggableNode type='customOutput' label='Output' />
@@ -16,8 +16,8 @@ export const PipelineToolbar = () => {
                 </div>
             </div>
             <div>
-                <h3 style={{ marginTop: '20px' }}>First 5 Abstraction Nodes</h3>
-                <div style={{ marginTop: '10px', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                <h3>First 5 Abstraction Nodes</h3>
+                <div className={Styles.toolbarItems}>
                     <DraggableNode type='math' label='Math' />
                     <DraggableNode type='filter' label='Filter' />
                     <DraggableNode type='json' label='JSON' />

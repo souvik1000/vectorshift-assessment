@@ -1,4 +1,6 @@
-// No runtime React types needed here; remove unused import
+import clsx from "clsx";
+
+import Styles from "./node.module.scss";
 
 /**
  * Factory function to create node components with a standardized abstraction.
@@ -12,23 +14,11 @@
  * @returns {Function} A React component for the node
  */
 
-export const NodeContainer = ({ children, width = 200, height = 100, bgColor = 'white' }) => {
+export const NodeContainer = ({ children, className, width = 200, height, bgColor = 'white' }) => {
     return (
       <div
-        style={{
-          width,
-          height,
-          border: '1px solid #333',
-          borderRadius: '8px',
-          backgroundColor: bgColor,
-          padding: '8px',
-          display: 'flex',
-          fontSize: '12px',
-          boxSizing: 'border-box',
-          flexDirection: 'column',
-          fontFamily: 'Arial, sans-serif',
-          justifyContent: 'space-between',
-        }}
+        className={clsx(Styles.nodeContainer, className)}
+        style={{ width, height, backgroundColor: bgColor }}
       >
         {children}
       </div>

@@ -13,13 +13,13 @@ export const JSONNode = createNode({
       label: 'Mode',
       type: 'select',
       options: ['Parse', 'Stringify', 'Extract'],
-      default: 'Parse',
+      default: 'parse',
     },
     {
       name: 'path',
       label: 'Path',
       type: 'text',
-      default: 'data',
+      default: '',
     },
   ],
   handles: [

@@ -1,31 +1,46 @@
+import { SubmitButton } from './submit';
 import { DraggableNode } from './draggableNode';
+import { Tabs } from './shared/components/Tabs';
 
 import Styles from "./app.module.scss";
 
 export const PipelineToolbar = () => {
+    const coreNodes = [
+        { type: 'customInput', label: 'Input' },
+        { type: 'llm', label: 'LLM' },
+        { type: 'customOutput', label: 'Output' },
+        { type: 'text', label: 'Text - Clone' },
+    ];
+
+    const abstractionNodes = [
+        { type: 'math', label: 'Math' },
+        { type: 'json', label: 'JSON' },
+        { type: 'delay', label: 'Delay' },
+        { type: 'cache', label: 'Cache' },
+        { type: 'filter', label: 'Filter' },
+        { type: 'myOutput', label: 'Output Clone' },
+    ];
+
+    const tabs = [
+        { label: 'Given Nodes', content: coreNodes },
+        { label: 'Abstraction Nodes', content: abstractionNodes },
+    ];
+
+    const renderNode = (node) => (
+        <DraggableNode type={node.type} label={node.label} />
+    );
 
     return (
-        <div className={Styles.toolbarContainer}>
-            <div>
-                <h3>Core Nodes</h3>
-                <div className={Styles.toolbarItems}>
-                    <DraggableNode type='customInput' label='Input' />
-                    <DraggableNode type='llm' label='LLM' />
-                    <DraggableNode type='customOutput' label='Output' />
-                    <DraggableNode type='text' label='Text' />
-                </div>
+        <div className={Styles.headerContainer}>
+            <div className={Styles.toolbarContainer}>
+                <Tabs
+                    tabs={tabs}
+                    allowSearch={true}
+                    renderItem={renderNode}
+                    searchPlaceholder="Search nodes..."
+                />
             </div>
-            <div>
-                <h3>First 5 Abstraction Nodes</h3>
-                <div className={Styles.toolbarItems}>
-                    <DraggableNode type='math' label='Math' />
-                    <DraggableNode type='filter' label='Filter' />
-                    <DraggableNode type='json' label='JSON' />
-                    <DraggableNode type='delay' label='Delay' />
-                    <DraggableNode type='cache' label='Cache' />
-                    <DraggableNode type='myOutput' label='Custom Output' />
-                </div>
-            </div>
+            <SubmitButton className='button-green' />
         </div>
     );
 };

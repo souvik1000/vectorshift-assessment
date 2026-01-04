@@ -1,0 +1,48 @@
+@use "src/shared/styles/variables" as vars;
+
+.tabWrapper {
+    gap: 24px;
+    display: flex;
+    align-items: center;
+
+    .tabSearchbar {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+    }
+
+    .tabContainer {
+        gap: 10px;
+        display: flex;
+        margin-bottom: 10px;
+
+        .tabs {
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            background: transparent;
+        }
+    }
+}
+
+.tabItemsWrapper {
+    .tabSet {
+        gap: 20px;
+        display: flex;
+        align-items: center;
+        
+        .noResult {
+            color: #999;
+            font-size: 12px;
+        }
+    }
+    
+    .searchCounter {
+        font-size: 12px;
+        color: #666;
+    }
+}

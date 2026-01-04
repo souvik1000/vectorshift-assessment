@@ -1,9 +1,7 @@
-import { createNode } from '../shared/components/nodeFactory';
 import { Position } from 'reactflow';
 
-/**
- * Delay Node - Adds a delay/pause to the pipeline
- */
+import { createNode } from '../shared/components/nodeFactory';
+
 export const DelayNode = createNode({
   title: 'Delay',
   description: 'Add delay',
@@ -19,6 +17,4 @@ export const DelayNode = createNode({
     { id: 'input', type: 'target', position: Position.Left },
     { id: 'output', type: 'source', position: Position.Right },
   ],
-  width: 180,
-  bgColor: '#e0f2f1',
 });

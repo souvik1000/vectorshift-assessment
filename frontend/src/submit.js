@@ -1,8 +1,9 @@
 import { useStore } from './store';
 
+// TODO: Move it to .env or Constant folder
 const BASE_URL = 'http://localhost:8000';
 
-export const SubmitButton = () => {
+export const SubmitButton = ({ className }) => {
     const { nodes, edges } = useStore((state) => ({
         nodes: state.nodes,
         edges: state.edges,
@@ -31,8 +32,6 @@ export const SubmitButton = () => {
     };
 
     return (
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <button type="button" onClick={handleSubmit}>Submit</button>
-        </div>
+        <button className={className} type="button" onClick={handleSubmit}>Submit</button>
     );
 };

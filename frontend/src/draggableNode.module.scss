@@ -1,16 +1,19 @@
+@use "src/shared/styles/variables" as vars;
+
 .nodeWrapper {
     cursor: grab;
-    min-width: 60px;
-    height: 60px;
     display: flex;
+    font-size: 12px;
+    padding: 4px 16px;
+    border-radius: 4px;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    border-radius: 8px;
-    background-color: #fff;
-    border: 1px solid #adacac;
+    background-color: vars.$background-color;
+    border: 1px solid vars.$ancent-color;
 
     .nodelabel {
-        color: #333;
+        font-weight: 500;
+        color: vars.$primary-color;
     }
 }

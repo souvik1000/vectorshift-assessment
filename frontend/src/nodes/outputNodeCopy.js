@@ -1,11 +1,9 @@
-import { createNode } from '../shared/components/nodeFactory';
 import { Position } from 'reactflow';
+
+import { createNode } from '../shared/components/nodeFactory';
 
 export const OutputNodeCopy = createNode({
   title: 'Output',
-  width: 180,
-  height: 140,
-  bgColor: '#ede7f6',
   fields: [
     {
       name: 'outputName',

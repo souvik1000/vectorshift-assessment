@@ -24,6 +24,4 @@ export const CacheNode = createNode({
     { id: 'output', type: 'source', position: Position.Right },
     { id: 'cached', type: 'source', position: Position.Right },
   ],
-  width: 180,
-  bgColor: '#ede7f6',
 });

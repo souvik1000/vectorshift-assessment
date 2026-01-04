@@ -1,4 +1,4 @@
-import { useAutoResize } from "../hooks/useAutoResize.ts";
+import { useAutoResize } from "../../hooks/useAutoResize.ts";
 
 const AutoGrowTextarea = ({ value, clasName, onChange, ...props }) => {
   const ref = useAutoResize(value);

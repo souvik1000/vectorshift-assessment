@@ -4,7 +4,6 @@ import { createNode } from '../shared/components/nodeFactory';
 
 export const TextNodeCopy = createNode({
   title: 'Text',
-  defaultHeight: false,
   fields: [
     {
       default: '',

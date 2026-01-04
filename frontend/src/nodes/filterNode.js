@@ -1,9 +1,7 @@
-import { createNode } from '../shared/components/nodeFactory';
 import { Position } from 'reactflow';
 
-/**
- * Filter Node - Filters data based on conditions
- */
+import { createNode } from '../shared/components/nodeFactory';
+
 export const FilterNode = createNode({
   title: 'Filter',
   description: 'Filter data by criteria',
@@ -27,6 +25,4 @@ export const FilterNode = createNode({
     { id: 'match', type: 'source', position: Position.Right },
     { id: 'nomatch', type: 'source', position: Position.Right },
   ],
-  width: 180,
-  bgColor: '#fff3e0',
 });

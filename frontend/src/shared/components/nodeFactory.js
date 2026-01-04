@@ -4,33 +4,14 @@ import { Handle, Position } from 'reactflow';
 
 import { useStore } from '../../store';
 import { NodeContainer } from './nodeContainer';
-import AutoGrowTextarea from './autoGrowTextArea';
+import AutoGrowTextarea from './AutoGrowTextArea';
 
 import Styles from "./node.module.scss";
 
-/**
- * Factory function to create node components with a standardized abstraction.
- * This reduces code duplication and makes it easy to create new nodes.
- * 
- * @param {Object} config - Configuration object for the node
- * @param {string} config.title - Node title
- * @param {string} config.description - Node description
- * @param {Array} config.fields - Array of field configurations
- * @param {Array} config.handles - Array of handle configurations
- * @param {number} config.width - Node width (default: 200)
- * @param {number} config.height - Node height (default: 100)
- * @param {Function} config.renderContent - Optional custom render function
- * @param {string} config.bgColor - Background color (default: white)
- * @returns {Function} A React component for the node
- */
-
-export const createNode = (config) => {
-  const { 
-    title, defaultHeight = true, width = 200, height = 100, fields = [],
-    handles = [], description = '', bgColor = 'white', renderContent = null
-  } = config;
-
-  return ({ id, data }) => {
+export const createNode = ({ 
+    title, width, height, bgColor, fields = [],
+    handles = [], description = '', renderContent = null
+  }) => ({ id, data }) => {
     const { updateNodeField, onConnect } = useStore.getState();
     const [fieldValues, setFieldValues] = useState(
       fields.reduce((acc, field) => {
@@ -38,8 +19,6 @@ export const createNode = (config) => {
         return acc;
       }, {})
     );
-
-    const nodeSize = defaultHeight ? { width, height } : { width };
 
     const handleFieldChange = (fieldName, value) => {
       setFieldValues((prev) => ({ ...prev, [fieldName]: value }));
@@ -102,7 +81,7 @@ export const createNode = (config) => {
     const sourceHandles = handles.filter((handle) => handle.type === 'source');
 
     return (
-      <NodeContainer className={Styles.nodeWrapper} width={nodeSize.width} height={nodeSize.height} bgColor={bgColor}>
+      <NodeContainer className={Styles.nodeWrapper} width={width} height={height} bgColor={bgColor}>
         <div className={Styles.title}><span>{title}</span></div>
 
         {description && <div className={Styles.description}><span>{description}</span></div>}
@@ -120,15 +99,15 @@ export const createNode = (config) => {
         {renderContent ? (
           renderContent(fieldValues, handleFieldChange, { id, data })
         ) : (
-          <div className={Styles.fieldsWrapper}>
+          <div className={Styles.fieldWrapper}>
             {fields.map((field) => (
               <div key={field.name} className={Styles.fieldContainer}>
                 <label className={Styles.label}><strong>{field.label}:</strong></label>
                 {field.type === 'textarea' && (
-                  <div>
+                  <div className={Styles.fieldText}>
                     <AutoGrowTextarea 
-                      clasName={clsx(Styles.field, Styles.fieldTextArea)}
                       value={fieldValues[field.name]}
+                      clasName={clsx(Styles.field, Styles.fieldTextArea)}
                       onChange={(e) => onTextHandler(e, field)}
                     />
     
@@ -137,6 +116,7 @@ export const createNode = (config) => {
                         {suggestions.map((sugg) => (
                           <div 
                             key={sugg.id}
+                            className={Styles.suggestionItem}
                             style={{ padding: 6, cursor: 'pointer' }} 
                             onClick={(event) => {
                               event.preventDefault();
@@ -150,7 +130,7 @@ export const createNode = (config) => {
                     )}
                   </div>
                 )}
-                {field.type === 'number' || field.type === 'text' && (
+                {(field.type === 'number' || field.type === 'text') && (
                   <input
                     type={field.type}
                     className={Styles.field}
@@ -186,4 +166,3 @@ export const createNode = (config) => {
       </NodeContainer>
     );
   };
-};

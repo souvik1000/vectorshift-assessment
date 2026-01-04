@@ -1,17 +1,45 @@
-.flowContainer {
-    border: 1px solid black;
+@use "src/shared/styles/variables" as vars;
+
+.flowWrapper {
+    display: block;
+    width: calc(100vw - 4px);
+    height: calc(100vh - 120px);
+
+    .flowContainer {
+        border: 1px solid black;
+    }
 }
 
-.toolbarContainer {
-    padding: 10px;
+.headerContainer {
     display: flex;
+    margin: 12px 12px;
     align-items: center;
     justify-content: space-between;
 
-    .toolbarItems {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+    .toolbarContainer {
+        margin-bottom: 12px;
+    
+        .toolbarSet {
+            gap: 20px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+    
+            .toolbarItems {
+                gap: 8px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+        
+            .toolbarTitle {
+                width: 180px;
+                display: flex;
+                font-size: 14px;
+                font-weight: 600;
+                align-items: center;
+                justify-content: end;
+                color: vars.$heading-color;
+            }
+        }
     }
 }

@@ -1,16 +1,7 @@
+import clsx from 'clsx';
 import { useState, useMemo } from 'react';
 
 import Styles from "./tabs.module.scss";
-import clsx from 'clsx';
-
-/**
- * Generic Tabs component with optional search functionality.
- * 
- * @param {Array} tabs - Array of tab config objects: { label, content (array of items) }
- * @param {boolean} allowSearch - If true, show search input above tabs
- * @param {Function} renderItem - Function to render each item in the tab content
- * @param {string} searchPlaceholder - Placeholder text for search input (default: "Search...")
- */
 
 export const Tabs = ({
   className,

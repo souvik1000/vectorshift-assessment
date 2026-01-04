@@ -2,32 +2,37 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Handle, Position } from 'reactflow';
 
+import Suggestion from './Suggestion';
 import { useStore } from '../../store';
 import { NodeContainer } from './nodeContainer';
 import AutoGrowTextarea from './AutoGrowTextArea';
+import { FIELD_TYPES } from '../../enums/fieldTypes';
+import { HANDLE_TYPES } from '../../enums/handleTypes';
 
 import Styles from "./node.module.scss";
+
+const { SOURCE, TARGET } = HANDLE_TYPES;
+const { NUMBER, SELECT, TEXT, TEXTAREA } = FIELD_TYPES;
 
 export const createNode = ({ 
     title, width, height, bgColor, fields = [],
     handles = [], description = '', renderContent = null
   }) => ({ id, data }) => {
-    const { updateNodeField, onConnect } = useStore.getState();
+    const nodesList = useStore((s) => s.nodes);
     const [fieldValues, setFieldValues] = useState(
       fields.reduce((acc, field) => {
         acc[field.name] = data?.[field.name] ?? field.default ?? '';
         return acc;
       }, {})
     );
+    const [suggestions, setSuggestions] = useState([]);
+    const [suggestField, setSuggestField] = useState(null);
+    const { updateNodeField, onConnect } = useStore.getState();
 
     const handleFieldChange = (fieldName, value) => {
       setFieldValues((prev) => ({ ...prev, [fieldName]: value }));
       updateNodeField?.(id, fieldName, value);
     };
-
-    const nodesList = useStore((s) => s.nodes);
-    const [suggestions, setSuggestions] = useState([]);
-    const [suggestField, setSuggestField] = useState(null);
 
     const openSuggestionsFor = (fieldName, filter = '') => {
       const candidates = (nodesList || [])
@@ -66,6 +71,8 @@ export const createNode = ({
       closeSuggestions();
     };
 
+    const suggestionClickHandler = (sugg) => selectSuggestion(sugg);
+
     const onTextHandler = (e, field) => {
       const v = e.target.value;
       handleFieldChange(field.name, v);
@@ -77,8 +84,8 @@ export const createNode = ({
       }
     }
 
-    const targetHandles = handles.filter((handle) => handle.type === 'target');
-    const sourceHandles = handles.filter((handle) => handle.type === 'source');
+    const targetHandles = handles.filter((handle) => handle.type === TARGET);
+    const sourceHandles = handles.filter((handle) => handle.type === SOURCE);
 
     return (
       <NodeContainer className={Styles.nodeWrapper} width={width} height={height} bgColor={bgColor}>
@@ -88,7 +95,7 @@ export const createNode = ({
 
         {targetHandles.map((handle) => (
           <Handle
-            type="target"
+            type={TARGET}
             key={handle.id}
             id={`${id}-${handle.id}`}
             style={handle.style || {}}
@@ -103,34 +110,21 @@ export const createNode = ({
             {fields.map((field) => (
               <div key={field.name} className={Styles.fieldContainer}>
                 <label className={Styles.label}><strong>{field.label}:</strong></label>
-                {field.type === 'textarea' && (
+                {field.type === TEXTAREA && (
                   <div className={Styles.fieldText}>
                     <AutoGrowTextarea 
                       value={fieldValues[field.name]}
                       clasName={clsx(Styles.field, Styles.fieldTextArea)}
                       onChange={(e) => onTextHandler(e, field)}
                     />
-    
-                    {suggestions.length > 0 && suggestField === field.name && (
-                      <div className={Styles.suggestionList}>
-                        {suggestions.map((sugg) => (
-                          <div 
-                            key={sugg.id}
-                            className={Styles.suggestionItem}
-                            style={{ padding: 6, cursor: 'pointer' }} 
-                            onClick={(event) => {
-                              event.preventDefault();
-                              selectSuggestion(sugg);
-                            }}
-                          >
-                            {sugg.label}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    <Suggestion 
+                      suggestions={suggestions}
+                      open={suggestions.length > 0}
+                      onClick={suggestionClickHandler}
+                    />
                   </div>
                 )}
-                {(field.type === 'number' || field.type === 'text') && (
+                {(field.type === NUMBER || field.type === TEXT) && (
                   <input
                     type={field.type}
                     className={Styles.field}
@@ -138,7 +132,7 @@ export const createNode = ({
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
                   />
                 )}
-                {field.type === 'select' && (
+                {field.type === SELECT && (
                   <select
                     className={Styles.field}
                     value={fieldValues[field.name]}
@@ -156,7 +150,7 @@ export const createNode = ({
 
         {sourceHandles.map((handle) => (
           <Handle
-            type="source"
+            type={SOURCE}
             key={handle.id}
             id={`${id}-${handle.id}`}
             style={handle.style || {}}

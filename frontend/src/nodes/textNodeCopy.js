@@ -1,5 +1,7 @@
 import { Position } from 'reactflow';
 
+import { FIELD_TYPES } from '../enums/fieldTypes';
+import { HANDLE_TYPES } from '../enums/handleTypes';
 import { createNode } from '../shared/components/nodeFactory';
 
 export const TextNodeCopy = createNode({
@@ -9,12 +11,12 @@ export const TextNodeCopy = createNode({
       default: '',
       name: 'text',
       label: 'Text',
-      type: 'textarea',
       createHandles: true,
+      type: FIELD_TYPES.TEXTAREA,
     },
   ],
   handles: [
-    { id: 'input', type: 'target', position: Position.Left },
-    { id: 'output', type: 'source', position: Position.Right }
+    { id: 'input', type: HANDLE_TYPES.TARGET, position: Position.Left },
+    { id: 'output', type: HANDLE_TYPES.SOURCE, position: Position.Right }
   ],
 });

@@ -5,15 +5,15 @@ import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import { LLMNode } from './nodes/llmNode';
 import { TextNode } from './nodes/textNode';
-import { TextNodeCopy } from './nodes/textNodeCopy';
 import { MathNode } from './nodes/mathNode';
 import { JSONNode } from './nodes/jsonNode';
 import { CacheNode } from './nodes/cacheNode';
 import { DelayNode } from './nodes/delayNode';
 import { InputNode } from './nodes/inputNode';
 import { OutputNode } from './nodes/outputNode';
-import { OutputNodeCopy } from './nodes/outputNodeCopy';
 import { FilterNode } from './nodes/filterNode';
+import { TextNodeCopy } from './nodes/textNodeCopy';
+import { OutputNodeCopy } from './nodes/outputNodeCopy';
 
 import 'reactflow/dist/style.css';
 import Styles from "./app.module.scss";
@@ -23,6 +23,7 @@ const proOptions = { hideAttribution: true };
 const nodeTypes = {
   llm: LLMNode,
   text: TextNodeCopy,
+  customText: TextNode,
   customInput: InputNode,
   customOutput: OutputNode,
   myOutput: OutputNodeCopy,

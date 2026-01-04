@@ -1,28 +1,30 @@
 import { Position } from 'reactflow';
 
+import { FIELD_TYPES } from '../enums/fieldTypes';
+import { HANDLE_TYPES } from '../enums/handleTypes';
 import { createNode } from '../shared/components/nodeFactory';
 
 export const OutputNodeCopy = createNode({
   title: 'Output',
   fields: [
     {
-      name: 'outputName',
+      default: '',
       label: 'Name',
-      type: 'text',
-      default: ''
+      name: 'outputName',
+      type: FIELD_TYPES.TEXT,
     },
     {
-      name: 'outputType',
       label: 'Type',
-      type: 'select',
-      options: ['Text', 'Image'],
       default: 'text',
+      name: 'outputType',
+      type: FIELD_TYPES.SELECT,
+      options: ['Text', 'Image'],
     }
   ],
   handles: [
     {
       id: 'value',
-      type: 'target',
+      type: HANDLE_TYPES.TARGET,
       position: Position.Left
     }
   ]

@@ -37,14 +37,10 @@ def is_dag(nodes: List[Node], edges: List[Edge]) -> bool:
             if edge.target in edge_count:
                 edge_count[edge.target] += 1
 
-    print(adj, edge_count, end="\n\n")
-    
-    # Kahn's algorithm (topological sort)
+    # BFS Algo approach
     queue = [node_id for node_id in edge_count if edge_count[node_id] == 0]
     sorted_count = 0
 
-    print(queue, sorted_count)
-    
     while queue:
         node = queue.pop(0)
         sorted_count += 1
@@ -53,7 +49,6 @@ def is_dag(nodes: List[Node], edges: List[Edge]) -> bool:
             if edge_count[neighbor] == 0:
                 queue.append(neighbor)
 
-    # If all nodes are processed, it's a DAG
     return sorted_count == len(nodes)
 
 app = FastAPI()

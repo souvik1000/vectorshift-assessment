@@ -1,5 +1,7 @@
 import { Position } from 'reactflow';
 
+import { FIELD_TYPES } from '../enums/fieldTypes';
+import { HANDLE_TYPES } from '../enums/handleTypes';
 import { createNode } from '../shared/components/nodeFactory';
 
 export const CacheNode = createNode({
@@ -9,19 +11,19 @@ export const CacheNode = createNode({
     {
       name: 'key',
       label: 'Cache Key',
-      type: 'text',
       default: 'cache_data',
+      type: FIELD_TYPES.TEXT,
     },
     {
       name: 'ttl',
-      label: 'TTL (seconds)',
-      type: 'number',
       default: '3600',
+      label: 'TTL (seconds)',
+      type: FIELD_TYPES.NUMBER,
     },
   ],
   handles: [
-    { id: 'input', type: 'target', position: Position.Left },
-    { id: 'output', type: 'source', position: Position.Right },
-    { id: 'cached', type: 'source', position: Position.Right },
+    { id: 'input', type: HANDLE_TYPES.TARGET, position: Position.Left },
+    { id: 'output', type: HANDLE_TYPES.SOURCE, position: Position.Right },
+    { id: 'cached', type: HANDLE_TYPES.SOURCE, position: Position.Right },
   ],
 });

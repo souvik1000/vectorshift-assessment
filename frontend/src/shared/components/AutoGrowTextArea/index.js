@@ -1,4 +1,8 @@
+import clsx from "clsx";
+
 import { useAutoResize } from "../../hooks/useAutoResize.ts";
+
+import Styles from "./autoGrowTextArea.module.scss";
 
 const AutoGrowTextarea = ({ value, clasName, onChange, ...props }) => {
   const ref = useAutoResize(value);
@@ -9,8 +13,7 @@ const AutoGrowTextarea = ({ value, clasName, onChange, ...props }) => {
       ref={ref}
       value={value}
       onChange={onChange}
-      className={clasName}
-      style={{ overflow: 'hidden', resize: 'none', width: '100%' }}
+      className={clsx(clasName, Styles.autoTextArea)}
       {...props}
     />
   );
